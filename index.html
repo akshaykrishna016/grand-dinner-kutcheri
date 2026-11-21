@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grand Dinner Kutcheri · Sri Sea Spice Gaana Sabha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Noto+Serif+Kannada:wght@700;900&family=Courier+Prime:wght@400;700&family=Caveat:wght@600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6ecd4; --paper2:#efe0bd; --maroon:#7a1424; --maroon2:#a51d33;
+    --gold:#c9962b; --ink:#2a1a12; --green:#1f5e3a; --muted:#6b5443;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;
+    background-image:radial-gradient(rgba(122,20,36,.06) 1px,transparent 1px);background-size:14px 14px}
+  a{color:var(--maroon2)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+  /* ticker */
+  .ticker{background:var(--maroon);color:#ffe9a8;font-family:'Courier Prime',monospace;font-weight:700;overflow:hidden;white-space:nowrap;border-bottom:3px double var(--gold)}
+  .ticker span{display:inline-block;padding:8px 0;animation:tick 38s linear infinite}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* hero */
+  header.hero{text-align:center;padding:34px 0 26px;position:relative}
+  .frame{border:3px solid var(--maroon);outline:2px solid var(--gold);outline-offset:5px;padding:26px 18px;background:var(--paper2);position:relative;margin-top:20px}
+  .frame:before,.frame:after{content:"❁";position:absolute;color:var(--gold);font-size:28px;top:-20px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 10px}
+  .frame:after{top:auto;bottom:-22px}
+  .presents{font-family:'Courier Prime',monospace;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--muted)}
+  .regd{font-size:11px;font-style:italic}
+  .kan{font-family:'Noto Serif Kannada',serif;font-weight:900;color:var(--maroon);font-size:clamp(64px,16vw,132px);line-height:1.05;margin:6px 0 0;text-shadow:3px 3px 0 var(--gold)}
+  h1{font-family:'Rozha One',serif;font-weight:400;font-size:clamp(30px,6vw,52px);margin:4px 0 6px;color:var(--ink);line-height:1.05}
+  .sub{font-family:'Caveat',cursive;font-size:clamp(22px,4vw,30px);color:var(--maroon2);transform:rotate(-2deg);display:inline-block}
+  .when{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0 8px}
+  .pill{background:var(--maroon);color:#fff4d6;padding:8px 14px;border-radius:999px;font-weight:600;font-size:15px}
+  .pill.alt{background:var(--green)}
+  .stamp{position:absolute;right:-6px;top:-30px;transform:rotate(12deg);border:3px solid var(--maroon2);color:var(--maroon2);font-family:'Courier Prime',monospace;font-weight:700;padding:6px 10px;font-size:13px;background:rgba(246,236,212,.85);text-align:center;line-height:1.2}
+
+  /* countdown */
+  .count{display:flex;gap:10px;justify-content:center;margin:16px 0 4px;flex-wrap:wrap}
+  .cell{background:var(--ink);color:#ffd76a;font-family:'Courier Prime',monospace;font-weight:700;min-width:78px;padding:10px 8px;border-radius:6px;box-shadow:inset 0 -4px 0 rgba(255,255,255,.08)}
+  .cell b{display:block;font-size:34px;line-height:1}
+  .cell small{font-size:11px;letter-spacing:.1em;color:#d9c79a}
+  .ist{font-size:13px;color:var(--muted);margin-top:8px}
+  .switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-weight:600}
+  .switch input{width:18px;height:18px;accent-color:var(--maroon)}
+  #countMsg{font-family:'Caveat',cursive;font-size:26px;color:var(--maroon2);min-height:34px}
+
+  section{margin:44px 0}
+  h2{font-family:'Rozha One',serif;font-weight:400;font-size:clamp(26px,5vw,36px);margin:0 0 4px;color:var(--maroon)}
+  .h2sub{font-family:'Courier Prime',monospace;color:var(--muted);font-size:14px;margin:0 0 16px}
+  .card{background:#fffaf0;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:18px;border-radius:4px}
+
+  /* programme */
+  table.prog{width:100%;border-collapse:collapse;font-size:15px}
+  .prog td{padding:11px 8px;border-bottom:1px dashed #b9a17a;vertical-align:top}
+  .prog td:first-child{font-family:'Courier Prime',monospace;font-weight:700;white-space:nowrap;color:var(--maroon)}
+  .prog .piece{font-weight:800}
+  .prog .raga{display:inline-block;font-size:12px;background:var(--paper2);border:1px solid var(--gold);padding:1px 7px;border-radius:999px;margin-left:4px;color:var(--ink)}
+  .prog .desc{color:var(--muted);font-size:14px}
+
+  /* raga generator */
+  .raga-box{text-align:center}
+  #raga{font-family:'Rozha One',serif;font-size:clamp(28px,6vw,44px);color:var(--maroon);margin:8px 0 2px}
+  #ragaMeta{font-family:'Courier Prime',monospace;color:var(--muted);min-height:44px}
+  button{font:inherit;font-weight:800;cursor:pointer;border:2px solid var(--ink);background:var(--gold);color:var(--ink);padding:10px 18px;border-radius:4px;box-shadow:3px 3px 0 var(--ink);transition:transform .08s, box-shadow .08s}
+  button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+  button.maroon{background:var(--maroon);color:#fff4d6}
+  button.green{background:var(--green);color:#eafff1}
+
+  /* rules */
+  ol.rules{margin:0;padding-left:22px}
+  ol.rules li{margin:8px 0}
+  .scribble{font-family:'Caveat',cursive;font-size:22px;color:var(--maroon2)}
+
+  /* FAQ */
+  details{background:#fffaf0;border:2px solid var(--ink);border-radius:4px;margin:10px 0;padding:12px 14px}
+  summary{cursor:pointer;font-weight:800}
+  details p{margin:8px 0 0;color:var(--muted)}
+
+  /* bill */
+  .bill{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  label{font-weight:700;font-size:14px;display:block;margin-bottom:4px}
+  input[type=number],input[type=text]{width:100%;font:inherit;padding:10px;border:2px solid var(--ink);border-radius:4px;background:#fff}
+  #billOut{margin-top:14px;font-family:'Courier Prime',monospace;font-size:15px;white-space:pre-line;min-height:20px}
+
+  /* rsvp */
+  .rsvp-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;position:relative;min-height:56px}
+  #noBtn{position:relative;transition:left .18s, top .18s}
+  #rsvpMsg{margin-top:14px;font-family:'Caveat',cursive;font-size:26px;color:var(--green);min-height:36px}
+
+  /* venue */
+  .venue{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .venue .big{font-size:56px}
+
+
+  /* dependency chain */
+  .chain{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .node{border:2px solid var(--ink);background:var(--paper2);border-radius:50%;width:104px;height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:4px 4px 0 var(--maroon);font-size:17px;transition:background .2s}
+  .node .q{font-size:30px;line-height:1.1}
+  .node.yes{background:#d7f0dc}.node.no{background:#f4cfd3}.node.maybe{background:#fbe8b0}.node.void{opacity:.45;filter:grayscale(1)}
+  .arrow{font-size:30px;color:var(--maroon);font-weight:800}
+  .ask{padding:12px 0;border-top:1px dashed #b9a17a;transition:opacity .2s}
+  .ask.locked{opacity:.35;pointer-events:none}
+  .askq{font-weight:800;margin-bottom:8px}
+  .opts{display:flex;gap:10px;flex-wrap:wrap}
+  .opts button{padding:8px 14px}
+  .opts button.picked{outline:3px solid var(--gold);outline-offset:2px}
+  #chainMsg{margin-top:14px;font-family:'Caveat',cursive;font-size:26px;color:var(--maroon2);min-height:36px}
+  @media (max-width:560px){ .node{width:84px;height:84px;font-size:15px} .arrow{font-size:22px} }
+
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:30px 0 40px;border-top:3px double var(--gold);margin-top:50px}
+  .counter{display:inline-block;background:#000;color:#3f3;font-family:'Courier Prime',monospace;padding:2px 8px;letter-spacing:.2em;margin:8px 0}
+  .blink{animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  .confetti{position:fixed;top:-40px;font-size:28px;pointer-events:none;z-index:99;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+
+  @media (max-width:560px){ .bill{grid-template-columns:1fr} .stamp{right:4px;top:-34px;font-size:11px} .prog td{padding:9px 4px} }
+</style>
+</head>
+<body>
+
+<div class="ticker"><span id="tickerText"></span></div>
+
+<div class="wrap">
+<header class="hero">
+  <div class="frame">
+    <div class="stamp">HOUSEFULL*<br><small>*5 people</small></div>
+    <div class="presents">Sri Sea Spice Gaana Sabha, JP Nagar <span class="regd">(Regd.? Not really.)</span> proudly presents</div>
+    <div class="kan">ಕಚೇರಿ</div>
+    <h1>A Grand Dinner Kutcheri<br>by KUTCHERI</h1>
+    <div class="sub">Margazhi season came early. And hungry.</div>
+    <div class="when">
+      <span class="pill">📅 Today · Sat 21 Nov 2026</span>
+      <span class="pill">🕖 7:00 PM sharp*</span>
+      <span class="pill alt">📍 Sea Spice, JP Nagar</span>
+    </div>
+    <div class="count" aria-live="polite">
+      <div class="cell"><b id="h">--</b><small>HOURS</small></div>
+      <div class="cell"><b id="m">--</b><small>MINUTES</small></div>
+      <div class="cell"><b id="s">--</b><small>SECONDS</small></div>
+    </div>
+    <div id="countMsg"></div>
+    <label class="switch"><input type="checkbox" id="ist"> Apply Indian Stretchable Time™ (+45 min)</label>
+    <div class="ist">*"Sharp" is used here in the decorative sense.</div>
+  </div>
+</header>
+
+<section id="chain">
+  <h2>Pending Confirmations</h2>
+  <p class="h2sub">// The Attendance Dependency Chain™ · status: unresolved</p>
+  <div class="card">
+    <div class="chain">
+      <div class="node" id="n0"><div class="q">❓</div><b>Srikar</b></div>
+      <div class="arrow">→</div>
+      <div class="node" id="n1"><div class="q">❓</div><b>Charan</b></div>
+      <div class="arrow">→</div>
+      <div class="node" id="n2"><div class="q">❓</div><b>Ragho</b></div>
+    </div>
+
+    <div class="ask" id="a0">
+      <div class="askq">1. Will Srikar make it?</div>
+      <div class="opts">
+        <button class="green" data-s="0" data-v="yes">Yes</button>
+        <button data-s="0" data-v="maybe">"Trying da"</button>
+        <button class="maroon" data-s="0" data-v="no">No</button>
+      </div>
+    </div>
+    <div class="ask locked" id="a1">
+      <div class="askq">2. Will he bring Charan?</div>
+      <div class="opts">
+        <button class="green" data-s="1" data-v="yes">Yes</button>
+        <button data-s="1" data-v="maybe">"Will ask him"</button>
+        <button class="maroon" data-s="1" data-v="no">No</button>
+      </div>
+    </div>
+    <div class="ask locked" id="a2">
+      <div class="askq">3. Will Charan bring Ragho?</div>
+      <div class="opts">
+        <button class="green" data-s="2" data-v="yes">Yes</button>
+        <button data-s="2" data-v="maybe">"Ragho is 'on the way'"</button>
+        <button class="maroon" data-s="2" data-v="no">No</button>
+      </div>
+    </div>
+
+    <div id="chainMsg">Awaiting upstream dependency: Srikar.</div>
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+      <a id="askLink" href="#" target="_blank" rel="noopener"><button class="green">Ask Srikar on WhatsApp</button></a>
+      <button id="chainReset">Reset chain</button>
+    </div>
+    <div class="fine">Answers here go nowhere. Srikar has to actually reply on WhatsApp.</div>
+  </div>
+</section>
+
+<section id="programme">
+  <h2>Kutcheri Programme</h2>
+  <p class="h2sub">// Traditional format. Untraditional menu.</p>
+  <div class="card">
+    <table class="prog">
+      <tr><td>7:00</td><td><span class="piece">Varnam</span> <span class="raga">Raga Traffic-varshini</span><div class="desc">Arrival, hugs, a 10-minute group lament about Bannerghatta Road.</div></td></tr>
+      <tr><td>7:20</td><td><span class="piece">Opening Kriti</span> <span class="raga">Raga Hungri · Adi Talam</span><div class="desc">Starters. Eaten continuously, in a steady 8-beat cycle.</div></td></tr>
+      <tr><td>7:40</td><td><span class="piece">Alapana</span> <span class="raga">Free time, no rhythm</span><div class="desc">20 minutes of staring at the menu, choosing between pomfret and kingfish. Nobody commits.</div></td></tr>
+      <tr><td>8:10</td><td><span class="piece">RTP</span> <span class="raga">Rava fry · Tawa fry · Pomfret</span><div class="desc">The main piece. The Ragam-Tanam-Pallavi of the coast.</div></td></tr>
+      <tr><td>8:45</td><td><span class="piece">Tani Avartanam</span> <span class="raga">Solo</span><div class="desc">One person tells a very long gig story. Everyone else quietly orders more neer dosa.</div></td></tr>
+      <tr><td>9:15</td><td><span class="piece">Thukkada</span> <span class="raga">Light pieces</span><div class="desc">Dessert, ice cream, and "okay, one last thing".</div></td></tr>
+      <tr><td>9:30</td><td><span class="piece">Mangalam</span> <span class="raga">Raga Bill-ragini</span><div class="desc">The bill arrives. Everyone suddenly checks their phone at the same time.</div></td></tr>
+      <tr><td>10:30</td><td><span class="piece">Encore</span> <span class="raga">Raga Parking-illa</span><div class="desc">Standing outside for 50 minutes saying "okay bye" without leaving.</div></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="raga">
+  <h2>Tonight's Raga Generator</h2>
+  <p class="h2sub">// Powered by AI (Artificially Indigested)</p>
+  <div class="card raga-box">
+    <div id="raga">Raga ???</div>
+    <div id="ragaMeta">Press the button. Receive culture.</div>
+    <div style="margin-top:12px"><button class="maroon" id="ragaBtn">Generate Raga 🎶</button></div>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>Sabha Niyamagalu (Rules)</h2>
+  <p class="h2sub">// Rasikas are requested to cooperate</p>
+  <div class="card">
+    <ol class="rules">
+      <li>Applause between courses is allowed and encouraged.</li>
+      <li>Nobody discusses 7/8 time signatures before the starters arrive.</li>
+      <li>"Let's jam after this" may be said exactly once, and must be followed by an actual calendar invite.</li>
+      <li>Phones on silent. Exception: the band group asking "where are you?" at 7:25.</li>
+      <li>Photos of the food are allowed. Photos of the fish's face need the fish's consent.</li>
+      <li>Anyone who hums "Chaaye" at the table must finish the whole song. All of it.</li>
+      <li>Black t-shirt dress code is not mandatory, but we all know it's happening anyway.</li>
+    </ol>
+    <p class="scribble">— by order of the Sabha Secretary (also a band member)</p>
+  </div>
+</section>
+
+<section id="bill">
+  <h2>The Bill-o-Meter™</h2>
+  <p class="h2sub">// Patented fair-split technology. Results final. No appeals.</p>
+  <div class="card">
+    <div class="bill">
+      <div><label for="total">Total bill (₹)</label><input type="number" id="total" value="6500" min="0"></div>
+      <div><label for="ppl">Number of vidwans</label><input type="number" id="ppl" value="5" min="1"></div>
+    </div>
+    <div style="margin-top:12px"><button class="green" id="billBtn">Calculate 🧾</button></div>
+    <div id="billOut"></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+  <p class="h2sub">// Frequently Avoided Questions</p>
+  <details><summary>Will there be live music?</summary><p>We ARE the live music. There will also be the restaurant's speaker, which we will silently judge.</p></details>
+  <details><summary>Is 7 PM real?</summary><p>7 PM is a concept. Please arrive at 7. You will arrive at 7:40. We will say "no no, we also just came".</p></details>
+  <details><summary>Is this website over-engineered for a dinner?</summary><p>Yes. Next question.</p></details>
+  <details><summary>Veg options?</summary><p>It's called <i>Sea</i> Spice. But yes, there is probably a paneer something. Probably.</p></details>
+  <details><summary>Who's paying?</summary><p>Please refer to the Bill-o-Meter™. It is never wrong.</p></details>
+  <details><summary>Can I bring my instrument?</summary><p>No. Except a spoon, for keeping tala on the table.</p></details>
+</section>
+
+<section id="rsvp">
+  <h2>RSVP</h2>
+  <p class="h2sub">// Kindly confirm your august presence</p>
+  <div class="card">
+    <label for="name">Your good name</label>
+    <input type="text" id="name" placeholder="e.g. Vidwan Rasika">
+    <div class="rsvp-btns" id="rsvpArea">
+      <button class="green" id="yesBtn">Yes, obviously 🐟</button>
+      <button id="maybeBtn">Maybe</button>
+      <button class="maroon" id="noBtn">No</button>
+    </div>
+    <div id="rsvpMsg"></div>
+    <div class="fine">This RSVP goes nowhere. It is purely spiritual. Just show up.</div>
+  </div>
+</section>
+
+<section id="venue">
+  <h2>The Venue</h2>
+  <p class="h2sub">// Auditorium. Air-conditioned (we hope).</p>
+  <div class="card venue">
+    <div class="big">🦐</div>
+    <div>
+      <div style="font-family:'Rozha One',serif;font-size:26px">Sea Spice, JP Nagar</div>
+      <div style="color:var(--muted)">Bengaluru · Doors 7:00 PM · Fish at the chef's discretion</div>
+      <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+        <a href="https://www.google.com/maps/search/?api=1&query=Sea+Spice+JP+Nagar+Bengaluru" target="_blank" rel="noopener"><button>📍 Open in Maps</button></a>
+        <a id="waLink" href="#" target="_blank" rel="noopener"><button class="green">Share on WhatsApp</button></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>You are visitor number</div>
+  <div class="counter" id="visits">0000007</div>
+  <div><span class="blink">●</span> Best viewed in Internet Explorer 6 at 800×600</div>
+  <p>© 2026 Sri Sea Spice Gaana Sabha. A parody. Not affiliated with Sea Spice, who have no idea this website exists.<br>
+  No fish were consulted in the making of this site.</p>
+</footer>
+</div>
+
+<script>
+// Ticker
+const news = [
+  "BREAKING: Fish confirmed for tonight",
+  "Prawns rumoured, sources say 'very likely'",
+  "Developing story: Will Srikar make it?",
+  "Unconfirmed: Charan. Further unconfirmed: Ragho",
+  "Experts warn: neer dosa supply may not survive the evening",
+  "Sabha announces: applause between courses permitted",
+  "Weather tonight: 100% chance of ghee roast"
+];
+const t = news.join("  ✦  ") + "  ✦  ";
+document.getElementById("tickerText").textContent = t + t;
+
+// Countdown to 7 PM IST today
+const base = new Date("2026-11-21T19:00:00+05:30").getTime();
+const istBox = document.getElementById("ist");
+const pad = n => String(n).padStart(2,"0");
+function tick(){
+  const target = base + (istBox.checked ? 45*60*1000 : 0);
+  let d = target - Date.now();
+  const msg = document.getElementById("countMsg");
+  if (d <= 0){
+    ["h","m","s"].forEach(id=>document.getElementById(id).textContent="00");
+    const late = Math.floor(-d/60000);
+    if (late < 240) msg.textContent = late < 1 ? "🔔 The Kutcheri has begun!" : `🔔 Kutcheri started ${late} min ago. You are late. Classic.`;
+    else msg.textContent = "The Kutcheri has concluded. Legends say they are still outside saying bye.";
+    return;
+  }
+  const h = Math.floor(d/3600000), m = Math.floor(d%3600000/60000), s = Math.floor(d%60000/1000);
+  document.getElementById("h").textContent = pad(h);
+  document.getElementById("m").textContent = pad(m);
+  document.getElementById("s").textContent = pad(s);
+  msg.textContent = h >= 3 ? "Plenty of time. (There is not plenty of time.)"
+                  : h >= 1 ? "Start thinking about which black t-shirt."
+                  : m >= 20 ? "Leave now. Bannerghatta Road does not care about your plans."
+                  : "You're late. Order an auto. Don't argue with the meter.";
+}
+istBox.addEventListener("change", tick);
+tick(); setInterval(tick, 1000);
+
+// Raga generator
+const pre = ["Neer","Ghee","Pomfret","Kori","Tawa","Bill","Parking","Traffic","Sol Kadhi","Kingfish","Rava","Extra-Rice"];
+const suf = ["-priya","-varshini","-ragini","-mohana","-kalyani","-bhairavi","-shree","-ranjani"];
+const moods = ["Evokes: deep longing for a second plate.","Evokes: the moment the waiter says 'sir, kingfish is over'.","Evokes: pretending you're full.","Evokes: staring at the bill like it owes you money.","Evokes: one last neer dosa. Then another.","Evokes: the silence when the fish arrives."];
+const talas = ["Adi Talam (eat in 8)","Rupaka Talam (eat in 3, burp on 1)","Misra Chapu (7 bites, irregular)","Khanda Chapu (5 bites, then water)","Free tempo (as per hunger)"];
+const pick = a => a[Math.floor(Math.random()*a.length)];
+document.getElementById("ragaBtn").onclick = () => {
+  document.getElementById("raga").textContent = "Raga " + pick(pre) + pick(suf);
+  document.getElementById("ragaMeta").textContent = pick(talas) + " · " + pick(moods);
+};
+
+// Bill-o-Meter
+const verdicts = [
+  "Adjustment: +₹500 for whoever said 'I'll just have a little'.",
+  "Adjustment: The person who ordered 'market price' fish pays the market.",
+  "Adjustment: Whoever arrives last orders the dessert. And pays for it.",
+  "Adjustment: Whoever suggested this restaurant gets a 0% discount and 100% credit.",
+  "Adjustment: Website builder requested exemption. Request denied by committee.",
+  "Adjustment: Person who 'forgot their wallet' pays double next time."
+];
+document.getElementById("billBtn").onclick = () => {
+  const tot = Math.max(0, +document.getElementById("total").value || 0);
+  const n = Math.max(1, Math.round(+document.getElementById("ppl").value || 1));
+  const each = Math.ceil(tot / n);
+  document.getElementById("billOut").textContent =
+    `Mathematically fair share: ₹${each.toLocaleString("en-IN")} each.\n` +
+    pick(verdicts) + "\nStatus: Someone will still say 'I'll GPay you later'. They will not.";
+};
+
+// RSVP
+const noBtn = document.getElementById("noBtn");
+const area = document.getElementById("rsvpArea");
+const msg = document.getElementById("rsvpMsg");
+let dodges = 0, noBase = null;
+const dodgeLines = ["Nope.","Wrong button.","Try again.","The fish is disappointed.","That button is decorative.","Error 404: 'No' not found."];
+function dodge(e){
+  e.preventDefault();
+  dodges++;
+  const r = area.getBoundingClientRect();
+  if (noBase === null) noBase = noBtn.offsetLeft;
+  const x = Math.random() * Math.max(0, r.width - noBtn.offsetWidth - 20) - noBase;
+  const y = (Math.random() * 80 - 40);
+  noBtn.style.left = x + "px"; noBtn.style.top = y + "px";
+  noBtn.textContent = pick(dodgeLines);
+  if (dodges >= 6){ noBtn.textContent = "Yes (fine)"; noBtn.classList.remove("maroon"); noBtn.classList.add("green"); noBtn.onclick = yes; noBtn.removeEventListener("mouseenter", dodge); noBtn.removeEventListener("touchstart", dodge); }
+}
+noBtn.addEventListener("mouseenter", dodge);
+noBtn.addEventListener("touchstart", dodge, {passive:false});
+noBtn.onclick = dodge;
+function who(){ return (document.getElementById("name").value.trim() || "Rasika"); }
+function yes(){
+  msg.style.color = "var(--green)";
+  msg.textContent = `Seat confirmed, ${who()}. Please don't clap on the wrong beat. 🐟`;
+  confetti();
+}
+document.getElementById("yesBtn").onclick = yes;
+document.getElementById("maybeBtn").onclick = () => {
+  msg.style.color = "var(--maroon2)";
+  msg.textContent = `"Maybe" is not a raga, ${who()}. Try again.`;
+};
+function confetti(){
+  const bits = ["🐟","🦐","🎹","🥁","🎤","🦀","✨","🍛"];
+  for (let i=0;i<40;i++){
+    const el = document.createElement("div");
+    el.className = "confetti";
+    el.textContent = pick(bits);
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (2 + Math.random()*2.5) + "s";
+    el.style.animationDelay = (Math.random()*0.6) + "s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 5500);
+  }
+}
+
+// Visitor counter (fake, obviously)
+let v = 7;
+try { v = (+localStorage.getItem("kutcheri_v") || 6) + 1; localStorage.setItem("kutcheri_v", v); } catch(e){}
+document.getElementById("visits").textContent = String(v).padStart(7,"0");
+
+
+// Attendance dependency chain
+const chainState = [null,null,null];
+const lines = {
+  0:{yes:"Srikar: confirmed. The chain lives.", maybe:"Srikar is in a superposition. Schrödinger's Srikar.", no:"Srikar is out. Charan and Ragho are now orphaned dependencies."},
+  1:{yes:"Charan: acquired. Ragho status loading…", maybe:"Srikar 'will ask him'. Historically, he does not ask him.", no:"Charan is out. Ragho is stranded. Someone call Ragho directly."},
+  2:{yes:"FULL CHAIN CONFIRMED. Order extra neer dosa. 🎉", maybe:"Ragho is 'on the way'. Ragho has been on the way since 2019.", no:"Ragho is out. The chain is complete, but sad."}
+};
+function renderChain(){
+  for (let i=0;i<3;i++){
+    const n = document.getElementById("n"+i), v = chainState[i];
+    const upstreamBroken = chainState.slice(0,i).some(x => x === "no");
+    n.className = "node" + (upstreamBroken ? " void" : v ? " "+v : "");
+    n.querySelector(".q").textContent = upstreamBroken ? "🚫" : v==="yes" ? "✅" : v==="no" ? "❌" : v==="maybe" ? "⏳" : "❓";
+    const unlocked = i===0 || chainState.slice(0,i).every(x => x && x !== "no");
+    document.getElementById("a"+i).classList.toggle("locked", !unlocked);
+    document.querySelectorAll('#a'+i+' button').forEach(b => b.classList.toggle("picked", b.dataset.v === v));
+  }
+}
+document.querySelectorAll(".ask button").forEach(b => b.onclick = () => {
+  const s = +b.dataset.s;
+  chainState[s] = b.dataset.v;
+  for (let j=s+1;j<3;j++) chainState[j] = null;
+  document.getElementById("chainMsg").textContent = lines[s][b.dataset.v];
+  renderChain();
+  if (s===2 && b.dataset.v==="yes") confetti();
+});
+document.getElementById("chainReset").onclick = () => {
+  chainState.fill(null); renderChain();
+  document.getElementById("chainMsg").textContent = "Awaiting upstream dependency: Srikar.";
+};
+renderChain();
+const askText = "Srikar 🙏 Dinner Kutcheri today, 7 PM, Sea Spice JP Nagar.\n1. Are you coming?\n2. Are you bringing Charan?\n3. Is Charan bringing Ragho?\nPlease reply. The whole chain depends on you.";
+document.getElementById("askLink").href = "https://wa.me/?text=" + encodeURIComponent(askText);
+
+// WhatsApp share
+const share = "🎶 GRAND DINNER KUTCHERI by KUTCHERI 🎶\nToday, 7 PM sharp (Indian Stretchable Time applies)\n📍 Sea Spice, JP Nagar\nBe there or be a tani avartanam.";
+document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent(share);
+</script>
+</body>
+</html>
